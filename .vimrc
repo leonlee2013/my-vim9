@@ -307,4 +307,44 @@ let g:blamer_relative_time = 1
 " highlight Blamer guifg=lightgrey
 let g:blamer_enabled = 1
 
+"=============================================================================
+" Claude Code 集成
+"==============================================================================
+" 打开垂直终端运行 Claude（,cl）
+nnoremap <leader>cl :rightbelow vert terminal claude<CR>
+" 指定宽度100在右侧打开 Claude（,clw）
+nnoremap <leader>clw :rightbelow vert terminal ++cols=80 claude<CR>
+" 打开水平终端运行 Claude（,clh）
+nnoremap <leader>clh :terminal claude<CR>
+
+" 复制选中内容到系统剪贴板，方便粘贴给 Claude（,y）
+vnoremap <leader>y "+y
+" 复制当前行到系统剪贴板（,y）
+nnoremap <leader>y "+yy
+
+" 从系统剪贴板粘贴 Claude 输出（,p）
+nnoremap <leader>p "+p
+
+" 重新加载当前文件（Claude 修改文件后刷新，,rl）
+nnoremap <leader>rl :e!<CR>
+
+" 自动检测文件被外部程序修改（Claude 直接编辑文件后自动提示）
+set autoread
+autocmd FocusGained,BufEnter * checktime
+
+"==============================================================================
+" Terminal 滚动配置
+" 滚动查看后自动回到 terminal insert 模式
+"==============================================================================
+tnoremap <C-u> <C-\><C-N><C-u>:call TermScrollBack()<CR>
+tnoremap <C-d> <C-\><C-N><C-d>:call TermScrollBack()<CR>
+tnoremap <C-b> <C-\><C-N><C-b>:call TermScrollBack()<CR>
+tnoremap <C-f> <C-\><C-N><C-f>:call TermScrollBack()<CR>
+
+function! TermScrollBack()
+  " 如果光标在最后一行，则自动回到 terminal insert 模式
+  if line('.') == line('$')
+    call feedkeys('i', 'n')
+  endif
+endfunction
 
