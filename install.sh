@@ -3,6 +3,7 @@
 set -e
 ABSFile=`realpath $0`
 ExecPath=`realpath "$(dirname $ABSFile)"`
+rm -rf $ExecPath/.vim/pack/plugins/start
 mkdir -p $ExecPath/.vim/pack/plugins/start && cd $ExecPath/.vim/pack/plugins/start
 for github in `cat $ExecPath/vim_plugins.ini` ; do
  git clone $github
@@ -33,5 +34,6 @@ if [ "${VimDPath}X" != "X" ] && [ -d $VimDPath ]; then
 else
   echo ".vim目录不存在, 不需要备份"
 fi
+cd $ExecPath
 cp -rf ./.vimrc ~/
 cp -rf ./.vim ~/
