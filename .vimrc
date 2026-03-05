@@ -57,9 +57,8 @@ function! CurDir()
 endfunction
 
 "==============================================================================
-"管理插件配置
+"管理插件配置 (Vim 8+ 内置包管理器, 插件目录: .vim/pack/plugins/start/)
 "==============================================================================
-execute pathogen#infect()
 filetype indent on           "针对不同的文件采用不同的缩进格式
 filetype plugin  on          "这对不同的文件类型加载对应的插件
 filetype plugin indent on    "启用自动补全功能
